@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import altair as alt
+import plotly.express as px
 
 # Load the data directly from the local file
 file_path = 'PE DEPT HOURS - STREMLIT.xlsx'
@@ -79,6 +80,11 @@ bar_chart = alt.Chart(period_class_count).mark_bar().encode(
 )
 
 st.altair_chart(bar_chart, use_container_width=True)
+
+# Interactive scatter plot with hover information
+fig = px.scatter(filtered_data, x='Start_Time', y='Day', color='PE_Teacher', hover_data=['Class_Set', 'Year_Group', 'Location'])
+fig.update_layout(title='Class Schedule', xaxis_title='Start Time', yaxis_title='Day')
+st.plotly_chart(fig)
 
 # Export filtered data as CSV
 @st.cache_data
