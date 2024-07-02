@@ -16,45 +16,53 @@ block_4_data.columns = [
 
 st.title('PE Department Timetable')
 
-# Function to create checkbox filter
-def create_checkbox_filter(column_name, df):
+# Function to create checkbox filter within an expander
+def create_checkbox_filter(expander, column_name, df):
     unique_values = df[column_name].dropna().unique()
     selected_values = []
     for value in unique_values:
-        if st.sidebar.checkbox(f'{value}', key=f'{column_name}_{value}'):
+        if expander.checkbox(f'{value}', key=f'{column_name}_{value}'):
             selected_values.append(value)
     return selected_values
 
-# Create filters using checkboxes
-selected_days = create_checkbox_filter('Day', block_4_data)
+# Create expandable sections for filters
+day_expander = st.sidebar.expander("Filter by Day")
+selected_days = create_checkbox_filter(day_expander, 'Day', block_4_data)
 if selected_days:
     block_4_data = block_4_data[block_4_data['Day'].isin(selected_days)]
 
-selected_periods = create_checkbox_filter('Secondary_Period', block_4_data)
+period_expander = st.sidebar.expander("Filter by Secondary Period")
+selected_periods = create_checkbox_filter(period_expander, 'Secondary_Period', block_4_data)
 if selected_periods:
     block_4_data = block_4_data[block_4_data['Secondary_Period'].isin(selected_periods)]
 
-selected_divisions = create_checkbox_filter('Division', block_4_data)
+division_expander = st.sidebar.expander("Filter by Division")
+selected_divisions = create_checkbox_filter(division_expander, 'Division', block_4_data)
 if selected_divisions:
     block_4_data = block_4_data[block_4_data['Division'].isin(selected_divisions)]
 
-selected_year_groups = create_checkbox_filter('Year_Group', block_4_data)
+year_group_expander = st.sidebar.expander("Filter by Year Group")
+selected_year_groups = create_checkbox_filter(year_group_expander, 'Year_Group', block_4_data)
 if selected_year_groups:
     block_4_data = block_4_data[block_4_data['Year_Group'].isin(selected_year_groups)]
 
-selected_classes = create_checkbox_filter('Class_Set', block_4_data)
+class_expander = st.sidebar.expander("Filter by Class")
+selected_classes = create_checkbox_filter(class_expander, 'Class_Set', block_4_data)
 if selected_classes:
     block_4_data = block_4_data[block_4_data['Class_Set'].isin(selected_classes)]
 
-selected_squads = create_checkbox_filter('Squad', block_4_data)
+squad_expander = st.sidebar.expander("Filter by Squad")
+selected_squads = create_checkbox_filter(squad_expander, 'Squad', block_4_data)
 if selected_squads:
     block_4_data = block_4_data[block_4_data['Squad'].isin(selected_squads)]
 
-selected_teachers = create_checkbox_filter('PE_Teacher', block_4_data)
+teacher_expander = st.sidebar.expander("Filter by PE Teacher")
+selected_teachers = create_checkbox_filter(teacher_expander, 'PE_Teacher', block_4_data)
 if selected_teachers:
     block_4_data = block_4_data[block_4_data['PE_Teacher'].isin(selected_teachers)]
 
-selected_locations = create_checkbox_filter('Location', block_4_data)
+location_expander = st.sidebar.expander("Filter by Location")
+selected_locations = create_checkbox_filter(location_expander, 'Location', block_4_data)
 if selected_locations:
     block_4_data = block_4_data[block_4_data['Location'].isin(selected_locations)]
 
