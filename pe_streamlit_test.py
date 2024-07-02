@@ -1,18 +1,14 @@
 import streamlit as st
 import pandas as pd
 
-# Upload the Excel file
-from google.colab import files
-uploaded = files.upload()
-
-# Load the data
-file_path = list(uploaded.keys())[0]
+# Load the data directly from the local file (assuming the file is in the same directory)
+file_path = 'PE DEPT HOURS - STREMLIT.xlsx'
 block_4_data = pd.read_excel(file_path, sheet_name='Block 4')
 
 # Rename columns for readability
 block_4_data.columns = [
-    "Day_Sorted", "Day", "Secondary_Period", "Division", "Year_Group",
-    "Start_Time", "End_Time", "Duration", "Class_Set", "Squad",
+    "Day_Sorted", "Day", "Secondary_Period", "Division", "Year_Group", 
+    "Start_Time", "End_Time", "Duration", "Class_Set", "Squad", 
     "PE_Teacher", "Location"
 ]
 
