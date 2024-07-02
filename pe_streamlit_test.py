@@ -66,7 +66,6 @@ st.sidebar.write(f'Location: {location}')
 # Summary Statistics
 st.write("Summary Statistics:")
 st.write(f"Total Classes: {filtered_data.shape[0]}")
-st.write(f"Average Duration: {filtered_data['Duration'].mean()}")
 
 # Bar chart of the number of classes per period
 period_class_count = filtered_data['Secondary_Period'].value_counts().reset_index()
@@ -82,7 +81,7 @@ bar_chart = alt.Chart(period_class_count).mark_bar().encode(
 st.altair_chart(bar_chart, use_container_width=True)
 
 # Export filtered data as CSV
-@st.cache
+@st.cache_data
 def convert_df_to_csv(df):
     return df.to_csv(index=False).encode('utf-8')
 
