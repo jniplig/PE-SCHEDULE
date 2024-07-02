@@ -20,8 +20,9 @@ st.title('PE Department Timetable')
 def create_checkbox_filter(expander, column_name, df):
     unique_values = df[column_name].dropna().unique()
     selected_values = []
-    for value in unique_values:
-        if expander.checkbox(f'{value}', key=f'{column_name}_{value}'):
+    cols = expander.columns(2)
+    for i, value in enumerate(unique_values):
+        if cols[i % 2].checkbox(f'{value}', key=f'{column_name}_{value}'):
             selected_values.append(value)
     return selected_values
 
